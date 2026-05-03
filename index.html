@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PING IT ON: Hydro Flask × Fred Again × Charlie Puth</title>
+<meta name="description" content="Sample the ping. Make a beat. Post on TikTok with #PingItOn. Top creators perform live with Fred Again and Charlie Puth at Sound Nightclub, Hollywood." />
+<link rel="stylesheet" href="styles.css" />
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<script>
+  // Screenshot static-render hook: ?shot=front|back applies a body class
+  // before paint so headless tools can capture each ticket face directly.
+  (function () {
+    var q = (location.search || '').match(/[?&]shot=(front|back)/);
+    if (q) document.documentElement.dataset.shot = q[1];
+  })();
+</script>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR — two fixed imgs, position tracked by JS -->
+<img id="cursorImg" class="cursor-png" src="./Microsite%20Assets/Cursor_Normal.png" alt="" draggable="false" />
+<img id="cursorImgGrab" class="cursor-png" src="./Microsite%20Assets/Cursor_BottleGrab.png" alt="" draggable="false" style="display:none" />
+
+<!-- FIXED NAV (centered pill cluster with logomark) -->
+<nav class="nav">
+  <ul class="nav-links">
+    <li><a href="#hero" class="nav-mark" aria-label="Home"><img src="./Microsite%20Assets/HydroFlask%20Logomark.svg" alt="" draggable="false" /></a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#museum">Museum</a></li>
+    <li><a href="#concert">Concert</a></li>
+    <li><a href="#game">Mini-game</a></li>
+    <li><a href="#merch">Merch</a></li>
+    <li><a href="#submit" class="nav-cta-inline" data-cursor="submit">Drop your link <span aria-hidden="true">↗</span></a></li>
+  </ul>
+</nav>
+
+<!-- 1. HERO -->
+<section class="hero" id="hero" data-bg="blue">
+  <div class="hero-inner">
+    <!-- LEFT COPY -->
+    <aside class="hero-copy hero-left reveal">
+      <span class="hero-eyebrow">HydroFlask presents</span>
+      <h1 class="hero-title hero-title-l">
+        <span class="t-row">Ping</span>
+        <span class="t-row">It</span>
+        <span class="t-row">On</span>
+      </h1>
+    </aside>
+
+    <!-- BOTTLE -->
+    <div class="bottle-stage" id="bottleStage">
+      <div class="ping-counter" id="pingCounter" aria-hidden="true">
+        <span class="pc-x">×</span>
+        <span class="pc-num" id="pingCounterNum">0</span>
+      </div>
+      <div class="ripples" id="ripples"></div>
+      <span class="static-halo" id="staticHalo"></span>
+      <svg class="halo-arc halo-arc-1" viewBox="-110 -110 220 220" aria-hidden="true">
+        <path d="M -90 -10 A 90 90 0 0 1 -10 -90" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <svg class="halo-arc halo-arc-2" viewBox="-110 -110 220 220" aria-hidden="true">
+        <path d="M 92 14 A 93 93 0 0 1 14 92" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div class="bottle-wrap" id="bottleWrap">
+        <button class="bottle-btn" id="bottleBtn" data-cursor="ping" aria-label="Drag or tap the bottle">
+          <div class="bottle-shadow"></div>
+          <img src="./Microsite%20Assets/Red%20HydroFlask%20Bottle.png" alt="Red Hydro Flask bottle" class="bottle-img" id="bottleImg" draggable="false" />
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT COPY -->
+    <aside class="hero-copy hero-right reveal">
+      <span class="hero-eyebrow">Win a spot<br/>on stage with</span>
+      <h2 class="hero-title hero-title-r">
+        <span class="t-row t-it">Fred<br/>Again</span>
+        <span class="t-amp">&amp;</span>
+        <span class="t-row t-it">Charlie<br/>Puth</span>
+      </h2>
+      <span class="hero-eyebrow hero-eyebrow-sm">At Club Omnia<br/>in Las Vegas</span>
+      <a href="#how" class="cta-primary" data-cursor="enter">
+        <span>Learn more</span>
+        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </aside>
+  </div>
+
+  <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound" data-cursor="play">
+    <svg class="snd-on" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </svg>
+    <svg class="snd-off" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+</section>
+
+<!-- 2. HOW IT WORKS -->
+<section class="how" id="how" data-bg="white">
+  <header class="section-head">
+    <span class="section-tag">02 / HOW IT WORKS</span>
+    <h2 class="section-title reveal">FIVE STEPS<br/><em>TO THE STAGE.</em></h2>
+  </header>
+
+  <div class="steps">
+    <article class="step reveal" style="--i:0">
+      <h3>Make the beat.</h3>
+      <div class="step-icon">
+        <i class="ph-fill ph-music-notes"></i>
+      </div>
+      <p>Drop, knock, flick. Sample your Hydro Flask ping into your DAW of choice.</p>
+    </article>
+
+    <article class="step reveal" style="--i:1">
+      <h3>Post on TikTok.</h3>
+      <div class="step-icon">
+        <i class="ph-fill ph-tiktok-logo"></i>
+      </div>
+      <p>Tag <strong>#PingItOn</strong> and <strong>@hydroflask</strong>. The louder, the better.</p>
+    </article>
+
+    <article class="step reveal" style="--i:2">
+      <h3>Unlock a code.</h3>
+      <div class="step-icon">
+        <i class="ph-fill ph-tag"></i>
+      </div>
+      <p>Drop your link below. Get a random <strong>10–25%</strong> off code for hydroflask.com.</p>
+    </article>
+
+    <article class="step reveal" style="--i:3">
+      <h3>Top 15 invited.</h3>
+      <div class="step-icon">
+        <i class="ph-fill ph-ticket"></i>
+      </div>
+      <p>The fifteen loudest beats win exclusive entry to the show.</p>
+    </article>
+
+    <article class="step reveal" style="--i:4">
+      <h3>Top 3 perform.</h3>
+      <div class="step-icon">
+        <i class="ph-fill ph-microphone-stage"></i>
+      </div>
+      <p>Hit the stage with Fred Again and Charlie Puth. Co-write a global release.</p>
+    </article>
+  </div>
+
+  <div class="how-strip">
+    <span>BEAT → POST → CODE → INVITE → STAGE</span>
+    <span>BEAT → POST → CODE → INVITE → STAGE</span>
+    <span>BEAT → POST → CODE → INVITE → STAGE</span>
+  </div>
+</section>
+
+<!-- 3. TIKTOK MUSEUM WALL -->
+<section class="museum" id="museum" data-bg="white">
+  <div class="museum-lights">
+    <span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span><span class="light"></span>
+  </div>
+  <div class="museum-floor"></div>
+
+  <div class="museum-plate reveal">
+    <span class="plate-line">THE</span>
+    <span class="plate-title">#PINGITON</span>
+    <span class="plate-line">MUSEUM</span>
+    <span class="plate-meta">EST. 2026 · A LIVING GALLERY OF EVERY ENTRY</span>
+  </div>
+
+  <div class="museum-ticker">
+    <div class="ticker-row ticker-left" id="tickerRow1">
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/RJYa_KXumg8?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=RJYa_KXumg8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 001</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/yBfTmyKyqOk?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=yBfTmyKyqOk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 002</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/wVbTGoMr1e4?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=wVbTGoMr1e4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 003</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/SbOXU9qISGY?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=SbOXU9qISGY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 004</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/fxwJuPlFIGU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=fxwJuPlFIGU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 005</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/ER3xnslamVs?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=ER3xnslamVs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 006</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/RJYa_KXumg8?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=RJYa_KXumg8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 001</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/yBfTmyKyqOk?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=yBfTmyKyqOk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 002</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/wVbTGoMr1e4?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=wVbTGoMr1e4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 003</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/SbOXU9qISGY?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=SbOXU9qISGY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 004</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/fxwJuPlFIGU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=fxwJuPlFIGU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 005</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/ER3xnslamVs?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=ER3xnslamVs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 006</figcaption></figure>
+    </div>
+    <div class="ticker-row ticker-right" id="tickerRow2">
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/j-pCUITTvxY?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=j-pCUITTvxY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 007</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/_6Fx8RSJ1jw?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=_6Fx8RSJ1jw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 008</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/sGxT7W_DMgU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=sGxT7W_DMgU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 009</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/B7mRLSVDjMk?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=B7mRLSVDjMk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 010</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/cxGcuhbxyhU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=cxGcuhbxyhU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 011</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/cobCzfGFATU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=cobCzfGFATU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 012</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/j-pCUITTvxY?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=j-pCUITTvxY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 007</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/_6Fx8RSJ1jw?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=_6Fx8RSJ1jw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 008</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/sGxT7W_DMgU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=sGxT7W_DMgU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 009</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/B7mRLSVDjMk?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=B7mRLSVDjMk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 010</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/cxGcuhbxyhU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=cxGcuhbxyhU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 011</figcaption></figure>
+      <figure class="frame"><div class="frame-inner"><iframe src="https://www.youtube-nocookie.com/embed/cobCzfGFATU?autoplay=1&loop=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&showinfo=0&playlist=cobCzfGFATU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe></div><figcaption class="frame-plate">ENTRY № 012</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="museum-caption">Each entry, framed. Each beat, on the wall.</div>
+</section>
+
+<!-- 5. CONCERT & PRIZE -->
+<section class="concert" id="concert" data-bg="red">
+  <div class="ticket-track">
+    <div class="ticket-stage">
+      <div class="ticket3d" id="ticket3d">
+        <img class="ticket-face ticket-front" src="Microsite Assets/ticket-front.png" alt="Concert ticket front" draggable="false" />
+        <img class="ticket-face ticket-back"  src="Microsite Assets/ticket-back.png"  alt="Concert ticket back"  draggable="false" />
+      </div>
+      <div class="concert-presenting">
+        <span class="cp-label">PRESENTING</span>
+        <h3 class="cp-title">PING IT ON LIVE</h3>
+      </div>
+      <div class="concert-photo cp-1"><img src="Microsite Assets/concert-photo-1.png" alt="Concert photo 1" draggable="false" /></div>
+      <div class="concert-photo cp-2"><img src="Microsite Assets/concert-photo-2.png" alt="Concert photo 2" draggable="false" /></div>
+      <div class="concert-photo cp-3"><img src="Microsite Assets/concert-photo-3.png" alt="Concert photo 3" draggable="false" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. DISCOUNT SUBMISSION -->
+<section class="submit" id="submit" data-bg="black">
+  <div class="submit-grid">
+    <div class="submit-copy">
+      <span class="section-tag dark">05 / SUBMISSION</span>
+      <h2 class="section-title light reveal">PASTE LINK.<br/><em>UNLOCK CODE.</em></h2>
+      <p class="submit-lede">Every valid TikTok URL gets a discount on the spot, and a permanent spot on the museum wall.</p>
+      <ul class="submit-list">
+        <li><span>✓</span> 10–25% off, randomized</li>
+        <li><span>✓</span> Auto-featured in #PingItOn Museum</li>
+        <li><span>✓</span> Eligible for Top 15 + Top 3 prizes</li>
+      </ul>
+    </div>
+
+    <form class="submit-form" id="submitForm" novalidate>
+      <label class="field-label" for="tiktokUrl">YOUR TIKTOK LINK</label>
+      <div class="field-row">
+        <input
+          id="tiktokUrl"
+          name="tiktokUrl"
+          type="url"
+          placeholder="https://www.tiktok.com/@you/video/..."
+          autocomplete="off"
+          spellcheck="false"
+          data-cursor="text"
+        />
+        <button type="submit" class="submit-btn" data-cursor="unlock">
+          <span class="btn-label">UNLOCK</span>
+          <span class="btn-icon">→</span>
+        </button>
+      </div>
+      <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+      <div class="reveal-card" id="revealCard" aria-hidden="true">
+        <div class="reveal-stamp">UNLOCKED</div>
+        <div class="reveal-pct" id="revealPct">15% OFF</div>
+        <div class="reveal-code-wrap">
+          <span class="reveal-code-label">YOUR CODE</span>
+          <code class="reveal-code" id="revealCode">PING-XXXXXX</code>
+          <button type="button" class="copy-btn" id="copyBtn" data-cursor="copy">COPY</button>
+        </div>
+        <div class="reveal-foot">Use at <strong>hydroflask.com</strong> · 1 use per customer</div>
+        <div class="reveal-confetti" id="confetti"></div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- MINI-GAME -->
+<section class="game" id="game" data-bg="blue">
+  <header class="section-head">
+    <span class="section-tag">06 / WARM UP</span>
+    <h2 class="section-title reveal">CATCH THE<br/><em>FALLING PINGS.</em></h2>
+    <p class="game-lede">Tap each bottle before it hits the floor. Every catch = one ping.</p>
+  </header>
+
+  <div class="game-shell">
+    <div class="game-hud">
+      <div class="hud-block"><span>SCORE</span><strong id="gameScore">0</strong></div>
+      <div class="hud-block"><span>BEST</span><strong id="gameBest">0</strong></div>
+      <div class="hud-block"><span>MISSED</span><strong id="gameMisses">0 / 5</strong></div>
+    </div>
+    <div class="game-board" id="gameBoard">
+      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
+      <div class="game-floor"></div>
+      <div class="game-overlay" id="gameOverlay">
+        <div class="overlay-title" id="overlayTitle">READY?</div>
+        <div class="overlay-sub" id="overlaySub">Hit START. Tap bottles before they crash.</div>
+        <button class="game-btn" id="gameBtn" data-cursor="play">START</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. MERCH -->
+<section class="merch" id="merch" data-bg="white">
+  <header class="section-head">
+    <span class="section-tag">07 / MERCH</span>
+    <h2 class="section-title reveal">DROP-DAY<br/><em>GOODS.</em></h2>
+  </header>
+
+  <div class="merch-grid">
+    <article class="m-item reveal" data-cursor="shop" id="merchAlarm">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/01-alarm-tone.png" alt="Alarm Tone" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Alarm Tone</span>
+        <span class="m-price">FREE</span>
+      </div>
+    </article>
+
+    <article class="m-item reveal" data-cursor="shop">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/02-ping-button.png" alt="Ping Button" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Ping Button</span>
+        <span class="m-price">$10</span>
+      </div>
+    </article>
+
+    <article class="m-item reveal" data-cursor="shop">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/03-hydro-shot-glass.png" alt="Hydro Shot Glass" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Hydro Shot Glass</span>
+        <span class="m-price">$20</span>
+      </div>
+    </article>
+
+    <article class="m-item reveal" data-cursor="shop">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/04-sticker-pack.png" alt="Sticker Pack" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Sticker Pack</span>
+        <span class="m-price">$5</span>
+      </div>
+    </article>
+
+    <article class="m-item reveal" data-cursor="shop">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/05-keychain.png" alt="Keychain" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Keychain</span>
+        <span class="m-price">$7</span>
+      </div>
+    </article>
+
+    <article class="m-item reveal" data-cursor="shop">
+      <div class="m-art">
+        <img src="Microsite Assets/merch/06-concert-tee.png" alt="Concert Tee" />
+      </div>
+      <div class="m-meta">
+        <span class="m-name">Concert Tee</span>
+        <span class="m-price">$15</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="foot-grid">
+    <div class="foot-mark">
+      <span class="logo-mark big">●</span>
+      <span class="foot-word">PING<span class="accent">IT</span>ON</span>
+    </div>
+    <div class="foot-block">
+      <span class="foot-label">Brand</span>
+      <a href="#hero">Hydro Flask</a>
+    </div>
+    <div class="foot-block">
+      <span class="foot-label">Campaign</span>
+      <a href="#how">How It Works</a>
+      <a href="#museum">Museum</a>
+      <a href="#submit">Submit</a>
+      <a href="#concert">Concert</a>
+    </div>
+    <div class="foot-block">
+      <span class="foot-label">Legal</span>
+      <a href="#">Rules</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Hydro Flask · A campaign concept</span>
+    <span>OMNIA NIGHTCLUB · LAS VEGAS</span>
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>

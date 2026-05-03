@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor / tooling
+.vscode/
+.claude/
+
+# Iteration captures — not needed in deployed site
+screenshots/
+
+# Unused source assets (not referenced by index.html / styles.css / script.js)
+Microsite Assets/HydroPing Presentation.pdf
+Microsite Assets/Charlie Puth.png
+Microsite Assets/Fred Again.png
+Microsite Assets/HydroPing Logomark + Wordmark.svg
+Microsite Assets/HydroFlask Logomark & Workmark.svg
+Microsite Assets/Red HydroFlask Bottle Old.png
+Microsite Assets/concert-back-reference.png
+Microsite Assets/concert-front-reference.png
+Microsite Assets/concert-photo-4.png
+
+# Unused font weights — only Regular, Medium, Bold, ExtraBold, Heavy, Black, Lazydog are loaded by @font-face
+Microsite Assets/HydroPing Fonts/*Italic.otf
+Microsite Assets/HydroPing Fonts/GalanoGrotesqueLight.otf
+Microsite Assets/HydroPing Fonts/GalanoGrotesqueExtraLight.otf
+Microsite Assets/HydroPing Fonts/GalanoGrotesqueSemiBold.otf
+Microsite Assets/HydroPing Fonts/GalanoGrotesqueThin.otf
