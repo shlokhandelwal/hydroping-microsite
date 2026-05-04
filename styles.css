@@ -97,7 +97,7 @@
   --cgrid-mask-mid: 75%;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
@@ -111,6 +111,12 @@ body {
   cursor: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* mobile-only: prevent horizontal swipe / pinch-to-pan and lock viewport width */
+@media (max-width: 900px) {
+  html { overflow-x: hidden; max-width: 100vw; }
+  body { max-width: 100vw; overscroll-behavior-x: none; }
 }
 
 /* hide native cursor on all interactive elements */
@@ -172,6 +178,7 @@ img { display: block; max-width: 100%; }
   box-shadow: var(--btn3d-shadow-x) var(--btn3d-shadow-y) 0 var(--btn3d-shadow-color);
   transform: scale(var(--btn3d-scale));
   transform-origin: center;
+  white-space: nowrap;
   transition: transform var(--btn3d-transition), box-shadow var(--btn3d-transition), background .18s ease, color .18s ease;
 }
 .nav-links a:hover {
@@ -223,12 +230,17 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 900px) {
-  .nav-links { gap: 6px; }
+  .nav { padding: 16px 14px; }
+  .nav-links { gap: 6px; flex-wrap: nowrap; max-width: 100%; }
   .nav-links a { padding: 8px 12px; font-size: 12px; }
 }
 @media (max-width: 700px) {
-  .nav-links li:nth-child(2),
-  .nav-links li:nth-child(4) { display: none; }
+  .nav { padding: 14px 12px; justify-content: space-between; }
+  .nav-links { width: 100%; justify-content: space-between; gap: 0; }
+  .nav-links li:not(:first-child):not(:last-child) { display: none; }
+  .nav-links a { padding: 9px 14px; font-size: 12px; }
+  .nav-links .nav-mark { padding: 8px 11px; }
+  .nav-links .nav-mark img { width: 18px; height: 18px; }
 }
 
 
@@ -585,6 +597,9 @@ section {
   padding: 0;
   outline: 0;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 .bottle-img {
   height: 100%;
@@ -801,6 +816,125 @@ section {
   .hero-right { align-items: flex-start; text-align: left; }
   .hero-right .kicker { flex-direction: row; }
   .bottle-stage { height: 60vh; min-height: 420px; max-height: none; }
+}
+
+@media (max-width: 700px) {
+  /* hero is a centered single-viewport column; top text + bottle + bottom text
+     hug the middle, not the edges */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100svh;
+    min-height: 100svh;
+  }
+  .hero-inner {
+    flex: 0 1 auto;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 70px 18px 30px;
+  }
+  .hero-left,
+  .hero-right {
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 0;
+    width: 100%;
+  }
+
+  .hero-eyebrow,
+  .hero-eyebrow-sm {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.3;
+  }
+  .hero-eyebrow br,
+  .hero-eyebrow-sm br { display: none; }
+
+  /* kill the floating bob effect on mobile */
+  .hero-title-l .t-row,
+  .hero-title-r .t-row { animation: none; }
+
+  /* PING IT ON on one line */
+  .hero-title-l {
+    font-size: clamp(54px, 15vw, 82px);
+    text-align: center;
+    line-height: 1;
+    text-shadow:
+      2px 2px 0 var(--red),
+      4px 4px 0 var(--red),
+      6px 6px 0 var(--red);
+  }
+  .hero-title-l .t-row { display: inline-block; }
+  .hero-title-l .t-row:nth-child(1) { transform: rotate(-2deg); }
+  .hero-title-l .t-row:nth-child(2) { transform: rotate(1deg); }
+  .hero-title-l .t-row:nth-child(3) { transform: rotate(-1deg); }
+
+  /* CHARLIE PUTH | & | FRED AGAIN side by side */
+  .hero-title-r {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin: 0;
+    font-size: clamp(38px, 11vw, 60px);
+  }
+  .hero-title-r .t-row { text-align: center; line-height: .88; }
+  .hero-title-r .t-row:nth-of-type(1) { transform: rotate(2deg); }   /* FRED AGAIN, right */
+  .hero-title-r .t-row:nth-of-type(3) { transform: rotate(-2deg); }  /* CHARLIE PUTH, left */
+  .hero-title-r .t-amp { font-size: .35em; margin: 0 4px; }
+
+  .hero-right .cta-primary {
+    padding: 14px 24px;
+    font-size: 14px;
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  /* bottle is 10% larger than the halo — stage carries the bigger size,
+     halo/arcs keep their own size so only the bottle PNG grows */
+  .bottle-stage {
+    width: clamp(286px, 70.4vw, 374px);
+    height: clamp(286px, 70.4vw, 374px);
+    min-height: 0;
+    max-height: none;
+    align-self: center;
+    justify-self: center;
+  }
+  .static-halo,
+  .halo-arc,
+  .ripple-out {
+    --halo-size: clamp(260px, 64vw, 340px);
+  }
+  .bottle-img { height: 100%; width: auto; max-height: 100%; }
+
+  .ping-counter { padding: 6px 10px; }
+  .pc-num { font-size: 22px; }
+  .pc-x { font-size: 16px; }
+
+  .sound-toggle { width: 36px; height: 36px; bottom: 14px; left: 14px; }
+}
+
+@media (max-width: 420px) {
+  .hero-title-l { font-size: clamp(46px, 13.5vw, 68px); }
+  .hero-title-r { font-size: clamp(30px, 9.5vw, 48px); }
+  .hero-eyebrow, .hero-eyebrow-sm { font-size: 13.5px; }
+  .bottle-stage {
+    width: clamp(242px, 66vw, 330px);
+    height: clamp(242px, 66vw, 330px);
+  }
+  .static-halo, .halo-arc, .ripple-out { --halo-size: clamp(220px, 60vw, 300px); }
+  .hero-inner { gap: 32px; }
 }
 
 /* ============================================================
@@ -1482,6 +1616,14 @@ section {
   user-select: none;
   -webkit-user-drag: none;
 }
+.ticket-face img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  user-select: none;
+}
 .ticket-back {
   transform: rotateX(180deg);
 }
@@ -1579,7 +1721,70 @@ html[data-shot="front"] #ticket3d { transform: rotateX(0deg) !important; }
 html[data-shot="back"]  #ticket3d { transform: rotateX(180deg) !important; }
 
 @media (max-width: 700px) {
-  .ticket-track { height: 200vh; }
+  /* mobile: flatten the scroll-driven flip into a normal-flow stack with
+     a forward-flipping ticket tilted at 15°. JS bails out on this breakpoint. */
+  .ticket-track {
+    height: auto;
+    padding: 90px 18px 90px;
+  }
+  .ticket-stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    perspective: 1800px;
+    padding: 0;
+  }
+
+  .ticket3d {
+    width: min(58vw, 320px);
+    aspect-ratio: 593 / 1253;
+    transform: rotateY(0deg);
+    animation: ticketSpin 6s linear infinite;
+  }
+  .ticket-back { transform: rotateY(180deg); }
+
+  .concert-presenting {
+    position: relative;
+    top: auto; left: auto;
+    width: 100%;
+    transform: none;
+    opacity: 1;
+    margin: 0;
+    text-align: center;
+  }
+  .concert-presenting .cp-label {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+  }
+  .concert-presenting .cp-title {
+    font-size: clamp(28px, 8vw, 44px);
+    text-shadow:
+      2px 2px 0 var(--black),
+      4px 4px 0 var(--black);
+  }
+
+  /* polaroids: stacked vertically with breathing room between each */
+  .concert-photo {
+    position: relative;
+    top: auto; left: auto;
+    width: min(78vw, 340px);
+    margin: 0;
+    padding: 8px;
+    box-shadow: 12px 12px 0 var(--accent);
+  }
+  .cp-1 { transform: rotate(-4deg); }
+  .cp-2 { transform: rotate(3deg); }
+  .cp-3 { transform: rotate(-3deg); }
+}
+
+@keyframes ticketSpin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
 }
 
 /* ============================================================

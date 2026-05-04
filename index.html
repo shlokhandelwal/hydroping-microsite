@@ -72,13 +72,13 @@
 
     <!-- RIGHT COPY -->
     <aside class="hero-copy hero-right reveal">
-      <span class="hero-eyebrow">Win a spot<br/>on stage with</span>
+      <span class="hero-eyebrow">Win a spot <br/>on stage with</span>
       <h2 class="hero-title hero-title-r">
         <span class="t-row t-it">Fred<br/>Again</span>
         <span class="t-amp">&amp;</span>
         <span class="t-row t-it">Charlie<br/>Puth</span>
       </h2>
-      <span class="hero-eyebrow hero-eyebrow-sm">At Club Omnia<br/>in Las Vegas</span>
+      <span class="hero-eyebrow hero-eyebrow-sm">At Club Omnia <br/>in Las Vegas</span>
       <a href="#how" class="cta-primary" data-cursor="enter">
         <span>Learn more</span>
         <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -207,8 +207,14 @@
   <div class="ticket-track">
     <div class="ticket-stage">
       <div class="ticket3d" id="ticket3d">
-        <img class="ticket-face ticket-front" src="Microsite Assets/ticket-front.png" alt="Concert ticket front" draggable="false" />
-        <img class="ticket-face ticket-back"  src="Microsite Assets/ticket-back.png"  alt="Concert ticket back"  draggable="false" />
+        <picture class="ticket-face ticket-front">
+          <source media="(max-width: 700px)" srcset="Microsite%20Assets/ticket-mobile-front.png" />
+          <img src="Microsite Assets/ticket-front.png" alt="Concert ticket front" draggable="false" />
+        </picture>
+        <picture class="ticket-face ticket-back">
+          <source media="(max-width: 700px)" srcset="Microsite%20Assets/ticket-mobile-back.png" />
+          <img src="Microsite Assets/ticket-back.png" alt="Concert ticket back" draggable="false" />
+        </picture>
       </div>
       <div class="concert-presenting">
         <span class="cp-label">PRESENTING</span>

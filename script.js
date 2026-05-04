@@ -10,6 +10,7 @@
      ---------------------------------------------------------- */
   const cursorImg     = document.getElementById('cursorImg');
   const cursorImgGrab = document.getElementById('cursorImgGrab');
+  const isTouch = matchMedia('(hover: none)').matches;
   let cursorCx = window.innerWidth / 2, cursorCy = window.innerHeight / 2;
   let cursorTx = cursorCx, cursorTy = cursorCy;
   let pointerX = cursorCx, pointerY = cursorCy;
@@ -32,7 +33,7 @@
     if (cursorImgGrab) cursorImgGrab.style.transform = `translate(${x - 4}px, ${y - 12}px)`;
     requestAnimationFrame(tickCursor);
   }
-  tickCursor();
+  if (!isTouch) tickCursor();
 
   function setCursorGrab(on) {
     if (!cursorImg || !cursorImgGrab) return;
@@ -564,7 +565,7 @@
     }
     requestAnimationFrame(tickParallax);
   }
-  requestAnimationFrame(tickParallax);
+  if (!isTouch) requestAnimationFrame(tickParallax);
 
   /* random pop-up variants — only ping-themed per campaign */
   const pingVariants = [
@@ -1190,6 +1191,8 @@
   (function ticketFlip() {
     const ticket = document.getElementById('ticket3d');
     if (!ticket) return;
+    /* mobile: a CSS-only spinning ticket replaces the scroll-driven flip */
+    if (matchMedia('(max-width: 700px)').matches) return;
     const ticketTrack = ticket.closest('.ticket-track');
     if (!ticketTrack) return;
     const photos = Array.from(document.querySelectorAll('.concert-photo'));
